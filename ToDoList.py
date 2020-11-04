@@ -6,10 +6,6 @@ class ToDoList:
         self.Category = category
         self.Name = listName
         self.ToDo = list()
-        self.addToList()
-
-    def updateToDoList(self):
-        ...
 
     def addToList(self, task):
         self.ToDo.append(task)
@@ -17,3 +13,9 @@ class ToDoList:
     def removeFromToDoList(self, task):
         if task in self.ToDo:
             self.ToDo.remove(task)
+
+    def print_list(self):
+        printed_list = ""
+        for item in self.ToDo:
+            printed_list += "- {}\n".format(item)
+        return printed_list
