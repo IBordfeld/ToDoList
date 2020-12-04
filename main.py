@@ -27,80 +27,97 @@ class Menu:
             if allow:
                 if self.state == "Start":
                     self.current, option = self.findOption(user) # Option that user selected in start menu
-                    lengthList = len(self.MyList.getList())
+                    lengthList = len(self.MyList.getList()) # gets the length
+                    # used when a list is selected and then will go to the current state 
                     if option <= lengthList:
                         self.state = "Current"
                         menuString = self.CurrentList(self.current)
                     else:
-                        extraOptions = user - lengthList
+                        extraOptions = user - lengthList # will find the number that the three extra options are at to access them 
                         if extraOptions == 1:
+                            # if the option is equal to 1 it will add a parent list to the program
                             name = input("What would you like to call your new list?: ")
-                            self.MyList.addParentList(name)
+                            self.MyList.addParentList(name) # uses the add function made 
                         elif extraOptions == 2:
+                            # if the option is equal to 2  it will remove a parent list
                             name = input("What list would you like to remove?: ")
-                            self.MyList.removeParentList(name)
+                            self.MyList.removeParentList(name) # uses the remove function
                         elif extraOptions == 3:
+                            # if the option is equal to 3 it will save and exit the program
                             self.MyList.SaveLists()
-                            exit()
+                            exit() #built in exit program 
                         else:
+                            # will go here if the option is not present in the program 
                             print("Not a valid option!")
-                        menuString = self.StartMenu()
+                        menuString = self.StartMenu() # updates the menu
 
                 elif self.state == "Current":
                     if user == 1:
+                        # if the input is one then it will add to the parent list 
                         task = input("What task would you like to add?: ")
-                        self.MyList.addToDoList(self.current, task)
-                        menuString = self.CurrentList(self.current)
+                        self.MyList.addToDoList(self.current, task) # adds item to the list 
+                        menuString = self.CurrentList(self.current) # the list with the new item
                     elif user == 2:
+                        # if the input is two then it will remove from the parent list 
                         task = input("What task would you like to remove?: ")
-                        self.MyList.removeFromToDoList(self.current, task)
-                        menuString = self.CurrentList(self.current)
+                        self.MyList.removeFromToDoList(self.current, task) # removes the inputted item
+                        menuString = self.CurrentList(self.current) # list without the item
                     elif user == 3:
-                        self.state = "Start"
+                        # if the input is three then it will go back to the start menu
+                        self.state = "Start" # sets the state
                         menuString = self.StartMenu()
                     else:
+                        # if they input an option that is not there it will print this statement 
                         print("Not a valid option!")
 
     def StartMenu(self):
+        # will add the numbers for the options in the program 
         position = 1
         startMenuString = "Your current Lists:\n"
+        # for each list it will display a number in front for the user to select
         for ListName, task in self.MyList.getList().items():
-            startMenuString += f"{position}. " + ListName + "\n"
-            position += 1
+            startMenuString += f"{position}. " + ListName + "\n" # how it is formatted 
+            position += 1 # increases the counter
 
         for extraOptions in self.getStateOptions():
-            startMenuString += f"{position}" + extraOptions + "\n"
-            position += 1
+            # will add the numbers for the three extra options in the start menu
+            startMenuString += f"{position}" + extraOptions + "\n" # format 
+            position += 1 # increases the counter
 
-        return startMenuString
+        return startMenuString # returns the options 
 
     def CurrentList(self, ListName):
         myListString = f"{ListName}:\n"
         listSelected = self.MyList.getList().get(ListName)
+        # displays the contents of the list choosen 
         for task in listSelected:
-            myListString += f"- {task} \n"
+            myListString += f"- {task} \n" # for the contents is formatted 
 
-        position = 1
+        position = 1 # counter 
+        # numbers the extra options for what you can do to a list
         for extraOptions in self.getStateOptions():
-            myListString += f"{position}" + extraOptions + "\n"
-            position += 1
+            myListString += f"{position}" + extraOptions + "\n" # formats it
+            position += 1 # increases the counter
 
-        return myListString
+        return myListString # returns the contents and the new options
 
     def findOption(self, option):
-        optionPosition = 1
+        optionPosition = 1 # counter 
         for ListName, task in self.MyList.getList().items():
             if optionPosition == option:
                 # Open list that was selected (if one was, other three options could have been selected)
                 return ListName, option
-            optionPosition += 1
+            optionPosition += 1 # increases the counter 
 
         return "", option
 
     def getStateOptions(self):
+        # the different options that are displayed depending on where you are in the program 
         if self.state == "Start":
+            # start menu options
             return [". Add a list", ". Remove a List", ". Save Lists and Exit"]
         else:
+            # list menu options 
             return [". Add to list", ". Remove from List", ". Go back to all my lists"]
 
 
