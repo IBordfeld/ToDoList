@@ -6,25 +6,33 @@ class ToDoList:
         self.ToDo = {}
         self.OpenList()
 
+    # function used to add a new list in the program
     def addParentList(self, ListName):
         self.ToDo[ListName] = list()
 
+    # function used to remove a parent list
     def removeParentList(self, ListName):
         try: 
             del self.ToDo[ListName]
         except:
+            # will print if the list name entered doesnt exist or it is spelt wrong
             print("Not a current list, make sure you have correct spelling and capitalization!")
     
+    #function that will add information to an existing lists
     def addToDoList(self, ListName, task):
         self.ToDo.get(ListName).append(task)
 
+    #function that will remove items from an existing list
     def removeFromToDoList(self, ListName, task):
         try: 
             self.ToDo.get(ListName).remove(task)
         except:
+            #will print if the item is not in the list or it is spelt incorrectly
             print("\nItem not found in list! Make sure capitalization is correct!\n")
 
+    #used to save the list
     def SaveLists(self):
+        #writes to the text file
         fptr = open("ToDo.txt", "w")
 
         for listName, task in self.ToDo.items():
@@ -37,7 +45,10 @@ class ToDoList:
         fptr.close()
         print("List saved! Have a good day!")
 
+    # used to open the text file 
     def OpenList(self):
+        
+        # will read from the text
         fptr = open("ToDo.txt", "r")
 
         for ToDo in fptr.readlines():
@@ -47,6 +58,7 @@ class ToDoList:
 
         fptr.close()
 
+    # will print the context of the list 
     def printList(self):
         listString = ""
         for name, listItems in self.ToDo.items():
