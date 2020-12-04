@@ -1,0 +1,24 @@
+Karley Conroy and Isaac Bordfeld
+ReadMe file
+COGS-Q 260
+December 1, 2020
+
+a.
+Our project is a to-do list program. It first lists an overall category that the list can be generalized as. 
+Then when you select that list it will list off what was on the list. First, the program will display all the 
+lists that you have and have additional choices to add a new list, remove a list, or save and exit. Here you 
+will be able to select a number that you would like to go into and it will take you to the list etc. Next, it
+will display the context of the list and ask if you want to add to the list or remove something from the list. 
+
+b.
+External libraries
+
+c.
+Everything in our program works how it is expected and how we designed it to
+
+d.
+Peer Evaluation:
+Isaac Bordfeld-
+     Responsibilities: Came up with the idea of what to do with the project. While also creating the programming parts and contributed to the ReadMe file 
+Karley Conroy-
+     Responsibilities: Helped with programming the project and added comments. Also created the ReadMe file
