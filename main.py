@@ -1,43 +1,65 @@
-from ToDoList import ToDoList
+# Isaac Bordfeld and Karley Conroy
+# ToDoList
 
-# test = ToDoList()
-# test.addParentList("Store")
-# test.addToDoList("Store", "Eggs")
-# test.addToDoList("Store", "Milk")
-# test.addToDoList("Store", "Bread")
-# test.addToDoList("Store", "Poptarts")
-# test.addParentList("Chores")
-# test.addToDoList("Chores", "Clean")
-# test.addToDoList("Chores", "Pet cat")
-# test.addToDoList("Chores", "Cook")
-# print(test.printList())
-# test.removeFromToDoList("Chores", "Pet cat")
-# print(test.printList())
+from ToDoList import ToDoList
 
 class Menu:
     def __init__(self):
         self.MyList = ToDoList()
         self.state = "Start"
+        self.current = None
 
     def showMenu(self):
         menuString = self.StartMenu()
         while 1:
-            print(menuString)
-            user = int(input("Select Option: "))
-            
-            if user == 9:
-                exit()
+            print(menuString) # Prints menu
 
-            
-            if self.state == "Start":
-                option = self.findOption(user) # Option that user selected in start menu
-                if option >= len(self.MyList.getList()): # If user's option was a list
-                    menuString = self.CurrentList(option)
-                    self.state = "Current"
-                else: # If any of the extra options were selected
-                    ...
-            elif self.state == "Current":
-                ...
+            # Takes user input as a string and make sure it's an integer. If user
+            # input is not an integer, then allow will be set to False and will rerun menu
+            user = input("Select Option: ")
+            allow = True 
+            try:
+                user = int(user)
+            except ValueError:
+                print("Not a valid option!")
+                allow = False
+                
+            if allow:
+                if self.state == "Start":
+                    self.current, option = self.findOption(user) # Option that user selected in start menu
+                    lengthList = len(self.MyList.getList())
+                    if option <= lengthList:
+                        self.state = "Current"
+                        menuString = self.CurrentList(self.current)
+                    else:
+                        extraOptions = user - lengthList
+                        if extraOptions == 1:
+                            name = input("What would you like to call your new list?: ")
+                            self.MyList.addParentList(name)
+                        elif extraOptions == 2:
+                            name = input("What list would you like to remove?: ")
+                            self.MyList.removeParentList(name)
+                        elif extraOptions == 3:
+                            self.MyList.SaveLists()
+                            exit()
+                        else:
+                            print("Not a valid option!")
+                        menuString = self.StartMenu()
+
+                elif self.state == "Current":
+                    if user == 1:
+                        task = input("What task would you like to add?: ")
+                        self.MyList.addToDoList(self.current, task)
+                        menuString = self.CurrentList(self.current)
+                    elif user == 2:
+                        task = input("What task would you like to remove?: ")
+                        self.MyList.removeFromToDoList(self.current, task)
+                        menuString = self.CurrentList(self.current)
+                    elif user == 3:
+                        self.state = "Start"
+                        menuString = self.StartMenu()
+                    else:
+                        print("Not a valid option!")
 
     def StartMenu(self):
         position = 1
@@ -70,13 +92,10 @@ class Menu:
         for ListName, task in self.MyList.getList().items():
             if optionPosition == option:
                 # Open list that was selected (if one was, other three options could have been selected)
-                return ListName
+                return ListName, option
             optionPosition += 1
 
-        return option
-
-    def findExtraOption(self):
-        ...
+        return "", option
 
     def getStateOptions(self):
         if self.state == "Start":
@@ -85,6 +104,6 @@ class Menu:
             return [". Add to list", ". Remove from List", ". Go back to all my lists"]
 
 
-test = Menu()
-test.MyList.addParentList("Homework")
-test.showMenu()
+if __name__ == "__main__":
+    test = Menu()
+    test.showMenu()

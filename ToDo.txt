@@ -1,0 +1,3 @@
+Homework:260,241,Final Paper for 370
+Chores:Clean,Feed cat,Take our trash,Put up Christmas lights
+Store:Eggs,Bread,Cheese,Milk,Cake

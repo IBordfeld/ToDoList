@@ -1,4 +1,4 @@
-# Isaac Bordfeld
+# Isaac Bordfeld and Karley Conroy
 # ToDoList
 
 class ToDoList:
@@ -10,13 +10,19 @@ class ToDoList:
         self.ToDo[ListName] = list()
 
     def removeParentList(self, ListName):
-        del self.ToDo[ListName]
-
+        try: 
+            del self.ToDo[ListName]
+        except:
+            print("Not a current list, make sure you have correct spelling and capitalization!")
+    
     def addToDoList(self, ListName, task):
         self.ToDo.get(ListName).append(task)
 
     def removeFromToDoList(self, ListName, task):
-        self.ToDo.get(ListName).remove(task)
+        try: 
+            self.ToDo.get(ListName).remove(task)
+        except:
+            print("\nItem not found in list! Make sure capitalization is correct!\n")
 
     def SaveLists(self):
         fptr = open("ToDo.txt", "w")
@@ -32,10 +38,7 @@ class ToDoList:
         print("List saved! Have a good day!")
 
     def OpenList(self):
-        try:
-            fptr = open("ToDo.txt", "r")
-        except Exception as identifier:
-            ...
+        fptr = open("ToDo.txt", "r")
 
         for ToDo in fptr.readlines():
             tempList = ToDo.split(":")
@@ -54,36 +57,3 @@ class ToDoList:
 
     def getList(self):
         return self.ToDo
-
-"""
-Here are your lists
-    1. Store
-    2. Chores
-    3. Remove a list
-    4. Add a list
-    5. Save List and Exit
-
-SELECTS 1
-
-Store:
-    - Eggs
-    - Milk
-    - Bread
-    - Poptarts
-    1. Add to list
-    2. Remove from List
-    3. Go back to all my lists
-"""
-
-
-# test = ToDoList()
-# test.addParentList("Store")
-# test.addToDoList("Store", "Eggs")
-# test.addToDoList("Store", "Milk")
-# test.addToDoList("Store", "Bread")
-# test.addToDoList("Store", "Poptarts")
-# test.addParentList("Chores")
-# test.addToDoList("Chores", "Clean")
-# test.addToDoList("Chores", "Pet cat")
-# test.addToDoList("Chores", "Cook")
-# test.SaveLists()
