@@ -3,8 +3,26 @@ ReadMe file
 COGS-Q 260
 December 1, 2020
 
-a.
+a. How program runs:
+     1. the program will display all the lists that you have and have additional choices to add a new list, remove a list, or save and exit. 
+     Here you will be able enter a number that correspondes with a list or a number that correspondes with an additional option at the bottom of 
+     the menu. 
+     
+     2. If you select "Add a new list" or "Remove a new list", then you will be asked for a name to add or remove from your overall lists. If you 
+     select "Save and Exit", then the program will save your lists and exit the program without error.
 
+     3. If you selected a list from the menu, then it will take you into the appropriate list. 
+     For example, when you go into a list you could see:
+     Store:
+          - Milk
+          - Eggs
+          - Butter
+          1. Add to list
+          2. Remove from list
+          3. Go back to all my lists
+
+     To interact witht he list, you will need to select 1 or 2 and be prompted to enter the name of the item you want to add/remove. Case sensitivity 
+     does matter! If you want to return to all of your lists, then select 3.
 
 b.
 We used no external libaries. 

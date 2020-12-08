@@ -10,7 +10,7 @@ class ToDoList:
     def addParentList(self, ListName):
         self.ToDo[ListName] = list()
 
-    # function used to remove a parent list
+    # function used to remove a list from a program
     def removeParentList(self, ListName):
         try: 
             del self.ToDo[ListName]
@@ -18,11 +18,11 @@ class ToDoList:
             # will print if the list name entered doesnt exist or it is spelt wrong
             print("Not a current list, make sure you have correct spelling and capitalization!")
     
-    #function that will add information to an existing lists
+    # function that will add a task to an existing list
     def addToDoList(self, ListName, task):
         self.ToDo.get(ListName).append(task)
 
-    #function that will remove items from an existing list
+    # function that will remove a task from an existing list
     def removeFromToDoList(self, ListName, task):
         try: 
             self.ToDo.get(ListName).remove(task)
@@ -47,7 +47,6 @@ class ToDoList:
 
     # used to open the text file 
     def OpenList(self):
-        
         # will read from the text
         fptr = open("ToDo.txt", "r")
 

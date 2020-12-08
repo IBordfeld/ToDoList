@@ -7,7 +7,7 @@ class Menu:
     def __init__(self):
         self.MyList = ToDoList()
         self.state = "Start"
-        self.current = None
+        self.current = None # Current name of list user is on
 
     def showMenu(self):
         menuString = self.StartMenu()
@@ -27,7 +27,8 @@ class Menu:
             if allow:
                 if self.state == "Start":
                     self.current, option = self.findOption(user) # Option that user selected in start menu
-                    lengthList = len(self.MyList.getList()) # gets the length
+                    lengthList = len(self.MyList.getList()) # gets the length of list so we can determine what option was selected
+                    
                     # used when a list is selected and then will go to the current state 
                     if option <= lengthList:
                         self.state = "Current"
@@ -74,40 +75,43 @@ class Menu:
         # will add the numbers for the options in the program 
         position = 1
         startMenuString = "Your current Lists:\n"
+
         # for each list it will display a number in front for the user to select
         for ListName, task in self.MyList.getList().items():
-            startMenuString += f"{position}. " + ListName + "\n" # how it is formatted 
-            position += 1 # increases the counter
+            startMenuString += f"{position}. " + ListName + "\n" # format of items in list
+            position += 1
 
         for extraOptions in self.getStateOptions():
             # will add the numbers for the three extra options in the start menu
-            startMenuString += f"{position}" + extraOptions + "\n" # format 
-            position += 1 # increases the counter
+            startMenuString += f"{position}" + extraOptions + "\n" # format of items in list
+            position += 1
 
-        return startMenuString # returns the options 
+        return startMenuString # returns the options
 
     def CurrentList(self, ListName):
         myListString = f"{ListName}:\n"
         listSelected = self.MyList.getList().get(ListName)
+
         # displays the contents of the list choosen 
         for task in listSelected:
-            myListString += f"- {task} \n" # for the contents is formatted 
+            myListString += f"- {task} \n" # format of items in list
 
-        position = 1 # counter 
+        position = 1 # Position of extra options on list
         # numbers the extra options for what you can do to a list
         for extraOptions in self.getStateOptions():
-            myListString += f"{position}" + extraOptions + "\n" # formats it
-            position += 1 # increases the counter
+            myListString += f"{position}" + extraOptions + "\n" # format of items in list
+            position += 1
 
         return myListString # returns the contents and the new options
 
     def findOption(self, option):
-        optionPosition = 1 # counter 
+        optionPosition = 1
+
         for ListName, task in self.MyList.getList().items():
             if optionPosition == option:
                 # Open list that was selected (if one was, other three options could have been selected)
                 return ListName, option
-            optionPosition += 1 # increases the counter 
+            optionPosition += 1
 
         return "", option
 
